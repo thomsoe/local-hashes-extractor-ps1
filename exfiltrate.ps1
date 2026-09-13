@@ -1,6 +1,5 @@
 # ============================================================
 # SAM/SYSTEM/SECURITY extraction and exfiltration script
-# For OSCP lab use only
 # ============================================================
 
 Write-Host "[*] Starting registry hives extraction..." -ForegroundColor Cyan
