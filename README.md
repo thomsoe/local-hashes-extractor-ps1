@@ -1,7 +1,7 @@
 # Powershell script for Windows local hashes extraction
 This Powershell script saves SAM, SECURITY and SYSTEM hives in C:\Users\Public\, compress the files in an archive and send it to the POST Python Web server in this repo.    
 
-Some EDRs can be bypassed by first bypassing AMSI and then launching the script. Regarding AVs, I have had poor results as it is more easily detected because it uses recognisable commands, but feel free to add some evasion techniques, such as changing the saved locations of the hives.
+Some EDRs can be bypassed by first bypassing AMSI and then launching the script. Regarding AVs, I have had poor results, the script is more easily detected as it uses recognisable commands. Feel free to add some evasion techniques, such as changing the saved locations of the hives.
 
 You (obviously) need admin or SYSTEM privileges to use it.
 
